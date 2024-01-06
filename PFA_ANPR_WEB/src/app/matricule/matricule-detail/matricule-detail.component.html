@@ -1,0 +1,41 @@
+<!-- The AG Grid component -->
+<!-- Add button using PrimeNG Button component -->
+<p-table [value]="products" [tableStyle]="{'min-width': '100rem'}">
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      Products
+      <p-button>Enregistrer client</p-button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 25%;">Name</th>
+      <th style="width: 25%;">Image</th>
+      <th style="width: 25%;">Price</th>
+      <th style="width: 25%;">Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td style="width: 25%;">{{ product.name }}</td>
+      <td style="width: 25%;">{{ product.quantity }}</td>
+      <td style="width: 25%;">{{ product.category }}</td>
+      <!-- New column for buttons -->
+      <td style="width: 25%;">
+        <!-- Update button -->
+        <p-button icon="pi pi-user" label="Info" [rounded]="true" [text]="true" severity="info " (click)="onInfoButtonClick(product)"></p-button>
+
+        <!-- Delete button -->
+        <p-button icon="pi pi-bookmark" label="Update" [rounded]="true" [text]="true" severity="secondary " (click)="onUpdateButtonClick(product)"></p-button>
+
+        <!-- Info button -->
+        <p-button icon="pi pi-times" label="Delete" [rounded]="true" [text]="true" severity="danger " (click)="onDeleteButtonClick(product)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+      In total there are {{ products ? products.length : 0 }} products.
+    </div>
+  </ng-template>
+</p-table>
