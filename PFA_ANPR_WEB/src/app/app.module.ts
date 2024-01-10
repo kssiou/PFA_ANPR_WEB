@@ -19,7 +19,6 @@ import { MenuModule } from 'primeng/menu';
 import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';import { FormsModule } from '@angular/forms';
 import { ChartModule } from 'primeng/chart';
-import { PoliceDetailComponent } from './police/police-detail/police-detail.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
@@ -31,6 +30,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
+import {PoliceDetailComponent} from "./police/police-detail/police-detail.component";
 @NgModule({
   declarations: [
     AppComponent,
