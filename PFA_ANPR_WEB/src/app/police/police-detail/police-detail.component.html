@@ -67,8 +67,8 @@
             </td>
             <td>
               <div class="flex">
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editPolice(polices)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deletePolice(polices)"></button>
               </div>
             </td>
           </tr>
@@ -103,17 +103,19 @@
 
       <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" ></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"(click)="savePolice(police)" ></button>
       </ng-template>
       </p-dialog>
 
       <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
         <div class="flex align-items-center justify-content-center">
           <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-          <span *ngIf="product">Are you sure you want to delete <b>{{product.name}}</b>?</span>
+          <span *ngIf="polices">Are you sure you want to deletea  <b>{{police.name}}</b>?</span>
         </div>
         <ng-template pTemplate="footer">
+
           <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
+          <button pButton pRipple icon="pi pi-times" class="p-button-text" label="yes"  (click)="confirmDeleteSelected(police.id) "></button>
         </ng-template>
       </p-dialog>
 
@@ -124,6 +126,6 @@
         </div>
         <ng-template pTemplate="footer">
           <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
-          <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
+          <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" ></button>
         </ng-template>
       </p-dialog>

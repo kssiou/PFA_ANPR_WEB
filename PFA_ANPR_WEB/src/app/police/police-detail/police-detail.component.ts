@@ -4,6 +4,7 @@ import {Table} from "primeng/table";
 import {Product} from "../../api/product";
 import {PoliceService} from "../police.service";
 import {Police} from "../../api/police";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-police-detail',
@@ -32,7 +33,7 @@ export class PoliceDetailComponent implements OnInit {
   statuses: any[] = [];
 
   rowsPerPageOptions = [5, 10, 20];
-constructor(private policeservice:PoliceService) {}
+constructor(private policeservice:PoliceService,private router:Router) {}
 
   ngOnInit() {
     this.getPoliceByID();
@@ -198,48 +199,38 @@ constructor(private policeservice:PoliceService) {}
     this.deleteProductsDialog = true;
   }
 
-  editProduct(product: Product) {
-    this.product = { ...product };
+  editPolice(police: Police) {
+    this.police = { ...police };
     this.productDialog = true;
   }
 
-  deleteProduct(product: Product) {
+  deletePolice(police: Police) {
+    this.police = { ...police };
     this.deleteProductDialog = true;
-    this.product = { ...product };
+
   }
 
-  confirmDeleteSelected() {
-    this.deleteProductsDialog = false;
-    this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-    this.selectedProducts = [];
+  confirmDeleteSelected(id:any) {
+  this.deleteProductDialog = false;
+  this.policeservice.deletePolice(id).subscribe((data:any)=>{
+    console.log(data);
+    window.location.reload();
+  })
   }
   hideDialog() {
     this.productDialog = false;
     this.submitted = false;
   }
 
-  // saveProduct() {
-  //   this.submitted = true;
-  //
-  //   if (this.product.name?.trim()) {
-  //     if (this.product.id) {
-  //       // @ts-ignore
-  //       this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-  //       this.products[this.findIndexById(this.product.id)] = this.product;
-  //     } else {
-  //       this.product.id = this.createId();
-  //       this.product.code = this.createId();
-  //       this.product.image = 'product-placeholder.svg';
-  //       // @ts-ignore
-  //       this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
-  //       this.products.push(this.product);
-  //     }
-  //
-  //     this.products = [...this.products];
-  //     this.productDialog = false;
-  //     this.product = {};
-  //   }
-  // }
+  savePolice(police: Police) {
+    this.productDialog = false;
+    this.policeservice.createPolice(police).subscribe((data:any)=>{
+      console.log(data);
+      window.location.reload();
+    })
+
+
+  }
 
   findIndexById(id: string): number {
     let index = -1;

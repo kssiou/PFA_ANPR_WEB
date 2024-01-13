@@ -13,7 +13,7 @@ export class PoliceService {
   }
 
   createPolice(police: Police) {
-    return this.http.post(this.apiUrl, police);
+    return this.http.post(this.apiUrl+"/create", police);
   }
 
   getPoliceByID(id: any):Observable<Police> {
@@ -25,6 +25,6 @@ export class PoliceService {
     return this.http.get<Police[]>(this.apiUrl + '/all');
   }
   deletePolice(id: any) {
-    return this.http.delete(this.apiUrl+ '/' + id);
+    return this.http.delete(this.apiUrl+ '/delete/' + id);
   }
 }
