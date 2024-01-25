@@ -21,13 +21,15 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'UI Components',
+                label: 'Services',
                 items: [
                     { label: 'Matricule', icon: 'pi pi-fw pi-id-card', routerLink: ['./matricule'] },
-                    { label: 'Police', icon: 'pi-lock pi-check-square', routerLink: ['/police'] },
-                  { label: 'Statistique', icon: 'pi pi-fw pi-check-square', routerLink: ['/statistique'] },
-
-                  // { label: 'Orders', icon: 'pi pi-fw pi-ookmark', routerLink: ['/orders'] },
+                    { label: 'Agent', icon: 'pi pi-fw pi-lock ', routerLink: ['/police'] },
+                  { label: 'Fiche de Recherche ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche-recherche'] },
+                  { label: 'Vehicule ', icon: 'pi pi-fw pi-id-card', routerLink: ['/vehicule '] },
+                  { label: 'Police station  ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche de rechere '] },
+                  { label: 'Citoyens ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche de rechere '] },
+                  { label: 'Alert ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche de rechere '] },
 
                 ]
             },

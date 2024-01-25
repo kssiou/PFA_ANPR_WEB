@@ -2,16 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Table} from "primeng/table";
 import {Product} from "../../api/product";
-import {PoliceService} from "../police.service";
 import {Police} from "../../api/police";
 import {Router} from "@angular/router";
+import {PoliceService} from "../../police/police.service";
+
 
 @Component({
-  selector: 'app-police-detail',
-  templateUrl: './police-detail.component.html',
-  styleUrls: ['./police-detail.component.scss'],
+  selector: 'app-fiche-recherche-details',
+  templateUrl: './fiche-recherche-details.component.html',
+  styleUrls: ['./fiche-recherche-details.component.scss']
 })
-export class PoliceDetailComponent implements OnInit {
+export class FicheRechercheDetailsComponent implements OnInit {
 
   productDialog: boolean = false;
   NewPoliceDialog:boolean = false
@@ -34,7 +35,7 @@ export class PoliceDetailComponent implements OnInit {
   statuses: any[] = [];
 
   rowsPerPageOptions = [5, 10, 20];
-constructor(private policeservice:PoliceService,private router:Router) {}
+  constructor(private policeservice:PoliceService,private router:Router) {}
 
   ngOnInit() {
     this.getPoliceByID();
@@ -177,11 +178,11 @@ constructor(private policeservice:PoliceService,private router:Router) {}
   }
 
   getAllPolice(){
-  this.policeservice.getAllPolice().subscribe((data:any)=>{
-    console.log(data);
-    this.polices=data.policeListResponse;
-    console.log(this.polices);
-  })
+    this.policeservice.getAllPolice().subscribe((data:any)=>{
+      console.log(data);
+      this.polices=data.policeListResponse;
+      console.log(this.polices);
+    })
   }
   getPoliceByID(){
     this.policeservice.getPoliceByID(1).subscribe((data:any)=>{
@@ -212,11 +213,11 @@ constructor(private policeservice:PoliceService,private router:Router) {}
   }
 
   confirmDeleteSelected(id:any) {
-  this.deleteProductDialog = false;
-  this.policeservice.deletePolice(id).subscribe((data:any)=>{
-    console.log(data);
-    window.location.reload();
-  })
+    this.deleteProductDialog = false;
+    this.policeservice.deletePolice(id).subscribe((data:any)=>{
+      console.log(data);
+      window.location.reload();
+    })
   }
   hideDialog() {
     this.productDialog = false;
@@ -258,12 +259,3 @@ constructor(private policeservice:PoliceService,private router:Router) {}
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 }
-
-
-
-
-
-
-
-
-

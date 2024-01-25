@@ -31,12 +31,14 @@ import { DialogModule } from 'primeng/dialog';
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
 import {PoliceDetailComponent} from "./police/police-detail/police-detail.component";
+import { FicheRechercheDetailsComponent } from './fiche-recherche/fiche-recherche-details/fiche-recherche-details.component';
 @NgModule({
   declarations: [
     AppComponent,
     MatriculeDetailComponent,
     DashboardComponent,
-    PoliceDetailComponent
+    PoliceDetailComponent,
+    FicheRechercheDetailsComponent
   ],
   imports: [
     BrowserModule,

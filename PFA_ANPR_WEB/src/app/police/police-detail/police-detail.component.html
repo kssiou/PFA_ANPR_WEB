@@ -106,6 +106,38 @@
         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"(click)="savePolice(police)" ></button>
       </ng-template>
       </p-dialog>
+<p-dialog [(visible)]="NewPoliceDialog" [style]="{width: '450px'}" header="Police Details" [modal]="true" class="p-fluid">
+  <ng-template pTemplate="content">
+    <!--        <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="product.image">-->
+
+    <div class="formgrid grid">
+      <div class="field col">
+        <label for="name">name</label>
+        <input type="text" pInputText id="name" [(ngModel)]="police.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.name}"/>
+
+      </div>
+      <div class="field col">
+        <label for="surname">email</label>
+        <input type="text" pInputText id="surname" [(ngModel)]="police.surname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.surname}"/>
+
+      </div>
+    </div>
+    <div class="field">
+      <label for="name">email</label>
+      <input type="text" pInputText id="email" [(ngModel)]="police.email" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.name}"/>
+      <small class="ng-dirty ng-invalid" *ngIf="submitted && !police.name">email is required.</small>
+    </div><div class="field">
+    <label for="localisation">localisation</label>
+    <input type="text" pInputText id="localisation" [(ngModel)]="police.localisation" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.localisation}"/>
+    <small class="ng-dirty ng-invalid" *ngIf="submitted && !police.localisation">localisation is required.</small>
+  </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"(click)="savePolice(police)" ></button>
+  </ng-template>
+</p-dialog>
 
       <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
         <div class="flex align-items-center justify-content-center">

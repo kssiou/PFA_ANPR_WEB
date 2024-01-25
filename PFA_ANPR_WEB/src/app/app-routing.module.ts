@@ -4,6 +4,9 @@ import {AppLayoutComponent} from "./layout/app.layout.component";
 import {MatriculeDetailComponent} from "./matricule/matricule-detail/matricule-detail.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {PoliceDetailComponent} from "./police/police-detail/police-detail.component";
+import {
+  FicheRechercheDetailsComponent
+} from "./fiche-recherche/fiche-recherche-details/fiche-recherche-details.component";
 
 const routes: Routes = [
   {
@@ -12,6 +15,7 @@ const routes: Routes = [
       {path:'matricule',component:MatriculeDetailComponent},
       {path:'dashboard',component:DashboardComponent},
       {path:'police',component:PoliceDetailComponent},
+      {path:'fiche-recherche',component:FicheRechercheDetailsComponent},
 
     ]
   }
