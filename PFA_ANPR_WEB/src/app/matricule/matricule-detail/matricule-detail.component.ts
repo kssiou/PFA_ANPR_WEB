@@ -47,7 +47,7 @@ export class MatriculeDetailComponent implements OnInit {
   getAlllicensePlate(){
     this.licensePlateService.getAll().subscribe((data:any)=>{
       console.log(data);
-      this.licensePlates=data.licensePlateResponse;
+      this.licensePlates=data.licensePlateListResponses;
       console.log(this.licensePlates);
 
     })

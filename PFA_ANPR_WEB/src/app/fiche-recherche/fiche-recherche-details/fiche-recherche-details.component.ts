@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfirmationService, MessageService} from "primeng/api";
 import {Table} from "primeng/table";
 import {Product} from "../../api/product";
-import {Police} from "../../api/police";
 import {Router} from "@angular/router";
-import {PoliceService} from "../../police/police.service";
-import {Vehicle_owner} from "../../api/vehicle_owner";
+import {FicheDeRecherche} from "../../api/ficheDeRecherche";
+import {FicheRechercheService} from "../fiche-recherche.service";
 
 
 @Component({
@@ -14,27 +12,26 @@ import {Vehicle_owner} from "../../api/vehicle_owner";
   styleUrls: ['./fiche-recherche-details.component.scss']
 })
 export class FicheRechercheDetailsComponent implements OnInit {
-
   productDialog: boolean = false;
-  NewPoliceDialog:boolean = false;
-  vehicle_owners:Vehicle_owner[]=[];
-  vehicle_owner:Vehicle_owner={};
+  NewFicheRechercheDialog:boolean = false;
+  ficheDeRecherches:FicheDeRecherche[]=[];
+  ficheDeRecherche:FicheDeRecherche={};
   deleteProductDialog: boolean = false;
   deleteProductsDialog: boolean = false;
   products: Product[] = [];
   product: Product = {};
-  police: Police={};
-  polices: Police[]=[];
+  FicheRecherche: FicheDeRecherche={};
+  FicheRecherches: FicheDeRecherche[]=[];
   selectedProducts: Product[] = [];
   submitted: boolean = false;
   cols: any[] = [];
   statuses: any[] = [];
 
   rowsPerPageOptions = [5, 10, 20];
-  constructor(private policeservice:PoliceService,private router:Router) {}
+  constructor(private ficheRechercheService:FicheRechercheService,private router:Router) {}
   ngOnInit() {
-    this.getPoliceByID();
-    this.getAllPolice();
+    this.getByID();
+    this.getAll();
     this.cols = [
       { field: 'product', header: 'Product' },
       { field: 'price', header: 'Price' },
@@ -50,44 +47,44 @@ export class FicheRechercheDetailsComponent implements OnInit {
     ];
   }
 
-  getAllPolice(){
-    this.policeservice.getAllPolice().subscribe((data:any)=>{
+  getAll(){
+    this.ficheRechercheService.getAll().subscribe((data:any)=>{
       console.log(data);
-      this.polices=data.policeListResponse;
-      console.log(this.polices);
+      this.FicheRecherches=data.ficheDeRechercheListResponse;
+      console.log(this.FicheRecherches);
     })
   }
-  getPoliceByID(){
-    this.policeservice.getPoliceByID(1).subscribe((data:any)=>{
+  getByID(){
+    this.ficheRechercheService.getByID(1).subscribe((data:any)=>{
       console.log(data);
     })
   }
 
 
   openNew() {
-    this.police = {};
+    this.FicheRecherche = {};
     this.submitted = false;
-    this.NewPoliceDialog = true;
+    this.NewFicheRechercheDialog = true;
   }
 
   deleteSelectedProducts() {
     this.deleteProductsDialog = true;
   }
 
-  editPolice(police: Police) {
-    this.police = { ...police };
+  editficheDeRecherche(ficheDeRecherche: FicheDeRecherche) {
+    this.FicheRecherche = { ...ficheDeRecherche };
     this.productDialog = true;
   }
 
-  deletePolice(police: Police) {
-    this.police = { ...police };
+  deleteficheDeRecherche(ficheDeRecherche: FicheDeRecherche) {
+    this.FicheRecherche = { ...ficheDeRecherche };
     this.deleteProductDialog = true;
 
   }
 
   confirmDeleteSelected(id:any) {
     this.deleteProductDialog = false;
-    this.policeservice.deletePolice(id).subscribe((data:any)=>{
+    this.ficheRechercheService.delete(id).subscribe((data:any)=>{
       console.log(data);
       window.location.reload();
     })
@@ -97,9 +94,9 @@ export class FicheRechercheDetailsComponent implements OnInit {
     this.submitted = false;
   }
 
-  savePolice(police: Police) {
+  saveFicheRecherche(ficheDeRecherche: FicheDeRecherche) {
     this.productDialog = false;
-    this.policeservice.createPolice(police).subscribe((data:any)=>{
+    this.ficheRechercheService.create(ficheDeRecherche).subscribe((data:any)=>{
       console.log(data);
       window.location.reload();
     })
@@ -118,16 +115,6 @@ export class FicheRechercheDetailsComponent implements OnInit {
 
     return index;
   }
-
-  // createId(): string {
-  //   let id = '';
-  //   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //   for (let i = 0; i < 5; i++) {
-  //     id += chars.charAt(Math.floor(Math.random() * chars.length));
-  //   }
-  //   return id;
-  // }
-
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }

@@ -10,7 +10,7 @@ export class PoliceStationService {
   private apiUrl = 'http://localhost:8081/policeStation'; // Default API endpoint
   constructor(private http: HttpClient) {
   }
-  create(station: Station) {
+  create(station:   Station) {
     return this.http.post(this.apiUrl+"/create", station);
   }
   getByID(id: any):Observable<Station> {

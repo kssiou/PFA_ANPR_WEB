@@ -8,7 +8,7 @@ import {LicensePlate} from "../api/licensePlate";
   providedIn: 'root'
 })
 export class MatriculeService {
-  private apiUrl = 'http:/localhost:8081/licensePlate'; // Default API endpoint
+  private apiUrl = 'http://localhost:8081/licensePlate'; // Default API endpoint
   constructor(private http: HttpClient) {
   }
   create(licensePlate: LicensePlate) {
