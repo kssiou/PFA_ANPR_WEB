@@ -1,0 +1,63 @@
+<div class="px-5 min-h-screen flex justify-content-center align-items-center">
+    <div class="border-1 surface-border surface-card px-4 md:px-7 z-1 box-container" style="border-radius: 20px; padding-top: 1rem; padding-bottom: 4rem;">
+        <div class="img-box mb-5">
+            <img style="max-width: 190%;
+        height: auto;" src="assets/images/Nearsecure.png" alt="">
+        </div>
+
+        <form [formGroup]="myForm" (ngSubmit)="login()">
+            <div class="flex flex-column" style="gap: 10px;">
+
+                <span class="p-input-icon-left w-full mb-4">
+                  <i class="pi pi-envelope"></i>
+                  <input
+                  id="email"
+                  type="text"
+                  pInputText
+                  class="w-full md:w-25rem"
+                  formControlName="email"
+                  placeholder="Email"
+                  [ngClass]="{
+                  'ng-dirty ng-invalid':
+                    !myForm.controls['email'].valid &&
+                    !myForm.controls['email'].untouched
+                  }">
+              </span>
+                <span class="p-input-icon-left w-full" [ngStyle]="{'margin-bottom': loginError ? '0' : '1rem'}">
+                  <i class="pi pi-lock"></i>
+                  <p-password
+                    id="password"
+                    placeholder="{{ 'Enter your password' }}"
+                    formControlName="password"
+                    [feedback]="false"
+                    [ngClass]="{
+                      'ng-dirty ng-invalid':
+                        !myForm.controls['password'].valid &&
+                        !myForm.controls['password'].untouched
+                    }"
+                    styleClass="w-full md:w-25rem"
+                    inputStyleClass="w-full"
+                    [toggleMask]="true"
+                  ></p-password>
+              </span>
+                <span class="p-input-icon-left w-full mb-4" *ngIf="loginError">
+                <div class="w-full text-center p-0">
+                  <small [hidden]="!loginError" class="text-red-500">
+                    {{ loginError }}
+                  </small>
+                </div>
+              </span>
+
+                <div class="mb-4 flex flex-wrap gap-3">
+                    <div>
+                        <p-checkbox name="checkbox" value="val" styleClass="mr-2" formControlName="rememberMe" [binary]="true"></p-checkbox>
+                        <!---[(ngModel)]="rememberMe"-->
+                        <label for="checkbox" class="text-900 font-medium mr-8">Remember Me</label>
+                    </div>
+                    <a class="text-600 cursor-pointer hover:text-primary cursor-pointer ml-auto transition-colors transition-duration-300" routerLink="../reset-password/verify-user">Reset password</a>
+                </div>
+                <button pButton pRipple label="Log In" class="mx-auto" style="width: 50%;background: #01c7c3; border: 1px solid #01c7c3;" [disabled]="myForm.invalid" [loading]="isLoading" type="submit"></button>
+            </div>
+
+        </form>
+    </div>

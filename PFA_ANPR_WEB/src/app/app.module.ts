@@ -13,6 +13,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatriculeDetailComponent } from './matricule/matricule-detail/matricule-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuModule } from 'primeng/menu';
@@ -32,13 +34,30 @@ import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
 import {PoliceDetailComponent} from "./police/police-detail/police-detail.component";
 import { FicheRechercheDetailsComponent } from './fiche-recherche/fiche-recherche-details/fiche-recherche-details.component';
+import { FicheRechercheCreateComponent } from './fiche-recherche/fiche-recherche-create/fiche-recherche-create.component';
+import {AutoCompleteModule} from "primeng/autocomplete";
+import {ColorPickerModule} from "primeng/colorpicker";
+import { LoginComponent } from './login/login.component';
+import { LoginControllerComponent } from './login/login.controller';
+import { AuthenticationService } from './service/auth.service';
+import { VehiculeOwnerComponent } from './vehicule-owner/vehicule-owner.component';
+import { VehiculeDetailsComponent } from './vehicule/vehicule-details/vehicule-details.component';
+import { PoliceStationComponent } from './police-station/police-station.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MatriculeDetailComponent,
     DashboardComponent,
     PoliceDetailComponent,
-    FicheRechercheDetailsComponent
+    FicheRechercheDetailsComponent,
+    FicheRechercheCreateComponent,
+    LoginComponent,
+    LoginControllerComponent,
+    VehiculeOwnerComponent,
+    VehiculeDetailsComponent,
+    PoliceStationComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -73,10 +92,13 @@ import { FicheRechercheDetailsComponent } from './fiche-recherche/fiche-recherch
     DropdownModule,
     RadioButtonModule,
     InputNumberModule,
-    DialogModule
+    DialogModule,
+    AutoCompleteModule,
+    ReactiveFormsModule,
+    ColorPickerModule
 
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

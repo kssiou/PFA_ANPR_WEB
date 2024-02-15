@@ -1,30 +1,26 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
 import {Police} from "../api/police";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PoliceService {
-  private apiUrl = 'http://localhost:8081/policeOfficer'; // Default API endpoint
-
+export class VehiculeOwnerService {
+  private apiUrl = 'http://localhost:8081/vehicleOwner'; // Default API endpoint
   constructor(private http: HttpClient) {
   }
-
-  createPolice(police: Police) {
+  create(police: Police) {
     return this.http.post(this.apiUrl+"/create", police);
   }
-
-  getPoliceByID(id: any):Observable<Police> {
+  getByID(id: any):Observable<Police> {
     return this.http.get<Police>(this.apiUrl + '/' + id);
   }
-
-  getAllPolice():Observable<Police[]>
-{
+  getAll():Observable<Police[]>
+  {
     return this.http.get<Police[]>(this.apiUrl + '/all');
   }
-  deletePolice(id: any) {
+  delete(id: any) {
     return this.http.delete(this.apiUrl+ '/delete/' + id);
   }
 }

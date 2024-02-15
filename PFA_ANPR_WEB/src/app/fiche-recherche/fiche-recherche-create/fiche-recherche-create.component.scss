@@ -1,0 +1,13 @@
+.align-label-rating {
+  display: flex;
+  align-items: center;
+}
+
+.align-label-rating label {
+  margin-bottom: 0;
+  margin-right: 1em; /* Adjust as needed for spacing between label and rating */
+}
+
+.custom-rating-wrapper ::ng-deep .p-rating-star {
+  font-size: 5em; /* Adjust the font size as needed */
+}

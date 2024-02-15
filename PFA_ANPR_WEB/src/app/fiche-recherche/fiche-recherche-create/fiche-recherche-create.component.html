@@ -1,0 +1,148 @@
+<div class="grid">
+  <form [formGroup]="FicheRechercheForm">
+  <div class="col-12">
+        <div class="card">
+
+          <h3>Creation de fiche de recherche</h3>
+          <h5>donnees de personne</h5>
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-6">
+              <label for="Person_name">Nom</label>
+              <input pInputText type="text" id="Person_name" formControlName="Person_name" />
+            </div>
+            <div class="field col-12 md:col-6">
+              <label for="Person_surname">Prenom</label>
+              <input pInputText type="text" id="Person_surname" formControlName="Person_surname" />
+            </div>
+            <div class="field col-12 md:col-5">
+              <label for="Person_CIN">CIN</label>
+              <input pInputText type="text" id="Person_CIN" formControlName="Person_CIN" />
+            </div>
+            <div class="field col-12 md:col-3">
+              <label htmlFor="Person_nationality">Nationalite</label>
+              <input pInputText type="text" id="Person_nationality" formControlName="Person_nationality" />
+            </div>
+            <div class="field col-12 md:col-4">
+              <label for="Person_number">Numero</label>
+              <input pInputText type="text" id="Person_number" formControlName="Person_number" />
+            </div>
+            <div class="field col-12">
+            <label for="Person_address">Address</label>
+            <input pInputText type="text" id="Person_address" formControlName="Person_address" />
+          </div>
+            <div class="field col-12">
+              <label for="Person_email">Email</label>
+              <input pInputText type="text" id="Person_email" formControlName="Person_email" />
+            </div>
+            <div class="field col-12 md:col-6">
+              <label htmlFor="city">City</label>
+              <input pInputText id="city" type="text" />
+            </div>
+
+            <div class="field col-12 md:col-3">
+              <label htmlFor="Status">Status</label>
+              <p-dropdown [options]="dropdownItems" optionLabel="name" formControlName="Status"> </p-dropdown>
+            </div>
+            <div class="field col-12 md:col-3">
+              <label htmlFor="zip">Zip</label>
+              <input pInputText id="zip" type="text"formControlName="Zip" />
+            </div>
+            <div class="field col-12 md:col-5 align-label-rating">
+              <label htmlFor="lastname2">Degree de Gravite</label>
+              <div class="col-12 md:col-6">
+                <div class="custom-rating-wrapper">
+                  <p-rating formControlName="Gravity_degree"></p-rating>
+                </div>              </div>
+            </div>
+
+
+          </div>
+
+
+
+          <div *ngFor="let  vehicule of vehiculeList ">
+
+
+            <div class="p-fluid p-formgrid grid">
+              <div class="field col-12 md:col-3">
+                <label htmlFor="vehicle_registration1">Vehicule Registration</label>
+                <input pInputText id="vehicle_registration1" type="text" value="{{vehicule.vehicle_registration}}" readonly />
+              </div>
+              <div class="field col-12 md:col-3">
+                <label htmlFor="vehicle_Licence_plate1">Vehicule Matricule</label>
+                <input pInputText id="vehicle_Licence_plate1" type="text"  value="{{vehicule.vehicle_Licence_plate}}" readonly />
+              </div>
+
+              <div class="field col-12 md:col-3">
+                <label htmlFor="vehicle_model1">Vehicule Model</label>
+                <input pInputText id="vehicle_model1" type="text"  value="{{vehicule.vehicle_model}}" readonly />
+              </div>
+              <div class="field col-12 md:col-1">
+                <label For="vehicle_Lcouleur1">Couleur</label>
+                <input
+                  pInputText
+                  id="vehicle_Lcouleur1"
+                  type="text"
+                  [style.backgroundColor]="vehicule.vehicle_colors"
+                  readonly
+                />
+              </div>
+              <div class="field col-12 md:col-1 ">
+                <div  [style.padding-left.px]="20" [style.padding-top.px]="20">
+                <p-button     icon="pi pi-times" [rounded]="true" [text]="true" severity="danger " (click)="deleteVehicule(vehicule)"  ></p-button>              </div>
+              </div></div>
+
+
+          </div>
+
+          <div class="field col-12 md:col-2">
+            <button pButton pRipple type="button" label=" + Ajouter Vehicule" class="p-button-primary" (click)="showVehiculeDialg()"></button>
+          </div>
+          <div class="field col-12 md:col-12" style="text-align: right;">
+            <button pButton pRipple type="button" label="Enregistrer " class="p-button-success"  ></button>
+          </div>
+
+        </div>
+
+
+  </div>
+
+    <p-dialog [visible]="AddVehiculedialg" header="donnees de vehicule" [modal]="true" [style]="{ width: '25vw' ,height:'23vw'}" class="p-fluid"                 >
+        <ng-template pTemplate="content">
+          <form [formGroup]="AddVehiculeForm">
+            <div class="p-fluid p-formgrid grid">
+              <div class="field col-12 md:col-6">
+                <label htmlFor="vehicle_registration">Vehicule Registration</label>
+                <input pInputText id="vehicle_registration" type="text" formControlName="vehicle_registration"/>
+              </div>
+              <div class="field col-12 md:col-6">
+                <label htmlFor="vehicle_Licence_plate">Vehicule Matricule</label>
+                <input pInputText id="vehicle_Licence_plate" type="text" formControlName="vehicle_Licence_plate" />
+              </div>
+
+              <div class="field col-12 md:col-6">
+                <label htmlFor="vehicle_model">Vehicule Model</label>
+                <input pInputText id="vehicle_model" type="text" formControlName="vehicle_model"/>
+              </div>
+              <div class="field col-12 md:col-6">
+                <label For="color_vehicule">Couleur</label>
+                <div class="col-12 md:col-7" style="margin-right: 25px;">
+                  <p-colorPicker  [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" id="color_vehicule" formControlName="vehicle_colors"></p-colorPicker>
+                </div>
+              </div>
+
+
+
+            </div>
+</form>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideVehiculeDialg()"  ></button>
+          <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addVehicule()" ></button>
+        </ng-template>
+    </p-dialog>
+  </form>
+  {{vehiculeList|json}}
+</div>
+

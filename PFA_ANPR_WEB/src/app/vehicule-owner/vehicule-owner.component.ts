@@ -1,40 +1,34 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfirmationService, MessageService} from "primeng/api";
-import {Table} from "primeng/table";
-import {Product} from "../../api/product";
-import {Police} from "../../api/police";
+import {Product} from "../api/product";
 import {Router} from "@angular/router";
-import {PoliceService} from "../../police/police.service";
-import {Vehicle_owner} from "../../api/vehicle_owner";
-
+import {Table} from "primeng/table";
+import {VehiculeOwnerService} from "./vehicule-owner.service";
+import {Vehicle_owner} from "../api/vehicle_owner";
 
 @Component({
-  selector: 'app-fiche-recherche-details',
-  templateUrl: './fiche-recherche-details.component.html',
-  styleUrls: ['./fiche-recherche-details.component.scss']
+  selector: 'app-vehicule-owner',
+  templateUrl: './vehicule-owner.component.html',
+  styleUrls: ['./vehicule-owner.component.scss']
 })
-export class FicheRechercheDetailsComponent implements OnInit {
-
+export class VehiculeOwnerComponent implements OnInit {
   productDialog: boolean = false;
-  NewPoliceDialog:boolean = false;
-  vehicle_owners:Vehicle_owner[]=[];
-  vehicle_owner:Vehicle_owner={};
+  NewvehiculeOwnerDialog:boolean = false
   deleteProductDialog: boolean = false;
   deleteProductsDialog: boolean = false;
   products: Product[] = [];
   product: Product = {};
-  police: Police={};
-  polices: Police[]=[];
+  vehiculeOwner: Vehicle_owner={};
+  vehiculeOwners: Vehicle_owner[]=[];
   selectedProducts: Product[] = [];
   submitted: boolean = false;
   cols: any[] = [];
   statuses: any[] = [];
-
   rowsPerPageOptions = [5, 10, 20];
-  constructor(private policeservice:PoliceService,private router:Router) {}
+
+  constructor(private vehiculeOwnerService:VehiculeOwnerService,private router:Router) {}
+
   ngOnInit() {
-    this.getPoliceByID();
-    this.getAllPolice();
+    this.getAllOwners();
     this.cols = [
       { field: 'product', header: 'Product' },
       { field: 'price', header: 'Price' },
@@ -50,44 +44,45 @@ export class FicheRechercheDetailsComponent implements OnInit {
     ];
   }
 
-  getAllPolice(){
-    this.policeservice.getAllPolice().subscribe((data:any)=>{
+  getAllOwners(){
+    this.vehiculeOwnerService.getAll().subscribe((data:any)=>{
       console.log(data);
-      this.polices=data.policeListResponse;
-      console.log(this.polices);
+      this.vehiculeOwners=data.vehicleOwnerListResponse;
+      console.log(this.vehiculeOwners);
+
     })
   }
-  getPoliceByID(){
-    this.policeservice.getPoliceByID(1).subscribe((data:any)=>{
+  getvehiculeOwnerByID(){
+    this.vehiculeOwnerService.getByID(1).subscribe((data:any)=>{
       console.log(data);
     })
   }
 
 
   openNew() {
-    this.police = {};
+    this.vehiculeOwner = {};
     this.submitted = false;
-    this.NewPoliceDialog = true;
+    this.NewvehiculeOwnerDialog = true;
   }
 
   deleteSelectedProducts() {
     this.deleteProductsDialog = true;
   }
 
-  editPolice(police: Police) {
-    this.police = { ...police };
+  editvehiculeOwner(vehiculeOwner: Vehicle_owner) {
+    this.vehiculeOwner = { ...vehiculeOwner };
     this.productDialog = true;
   }
 
-  deletePolice(police: Police) {
-    this.police = { ...police };
+  deletevehiculeOwner(vehiculeOwner: Vehicle_owner) {
+    this.vehiculeOwner = { ...vehiculeOwner };
     this.deleteProductDialog = true;
 
   }
 
   confirmDeleteSelected(id:any) {
     this.deleteProductDialog = false;
-    this.policeservice.deletePolice(id).subscribe((data:any)=>{
+    this.vehiculeOwnerService.delete(id).subscribe((data:any)=>{
       console.log(data);
       window.location.reload();
     })
@@ -97,9 +92,9 @@ export class FicheRechercheDetailsComponent implements OnInit {
     this.submitted = false;
   }
 
-  savePolice(police: Police) {
+  savevehiculeOwner(vehiculeOwner: Vehicle_owner) {
     this.productDialog = false;
-    this.policeservice.createPolice(police).subscribe((data:any)=>{
+    this.vehiculeOwnerService.create(vehiculeOwner).subscribe((data:any)=>{
       console.log(data);
       window.location.reload();
     })

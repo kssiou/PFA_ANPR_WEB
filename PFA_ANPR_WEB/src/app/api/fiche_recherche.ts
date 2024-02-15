@@ -1,8 +1,14 @@
+import {Vehicule} from "./vehicule";
+
 export interface Fiche_recherche {
-  id?: number;
+
   Person_name?: string;
   Person_surname?: string;
-  vehicle_model?: string;
-  vehicle_Licence_plate?: string;
+  Person_nationality?:string;
+  Person_CIN?:string;
+  Person_address:string ;
+  Zip?:number;
+  Status:string;
   Gravity_degree?:string ;
+  Vehicules?:Vehicule[];
 }

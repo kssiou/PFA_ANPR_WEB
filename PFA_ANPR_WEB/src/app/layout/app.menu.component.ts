@@ -26,9 +26,9 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Matricule', icon: 'pi pi-fw pi-id-card', routerLink: ['./matricule'] },
                     { label: 'Agent', icon: 'pi pi-fw pi-lock ', routerLink: ['/police'] },
                   { label: 'Fiche de Recherche ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche-recherche'] },
-                  { label: 'Vehicule ', icon: 'pi pi-fw pi-id-card', routerLink: ['/vehicule '] },
-                  { label: 'Police station  ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche de rechere '] },
-                  { label: 'Citoyens ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche de rechere '] },
+                  { label: 'Vehicule ', icon: 'pi pi-fw pi-id-card', routerLink: ['/vehicule'] },
+                  { label: 'Police station  ', icon: 'pi pi-fw pi-id-card', routerLink: ['/station-police'] },
+                  { label: 'Citoyens ', icon: 'pi pi-fw pi-id-card', routerLink: ['/citoyens'] },
                   { label: 'Alert ', icon: 'pi pi-fw pi-id-card', routerLink: ['/fiche de rechere '] },
 
                 ]

@@ -1,40 +1,34 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfirmationService, MessageService} from "primeng/api";
-import {Table} from "primeng/table";
-import {Product} from "../../api/product";
-import {Police} from "../../api/police";
+import {Product} from "../api/product";
+import {Vehicle_owner} from "../api/vehicle_owner";
 import {Router} from "@angular/router";
-import {PoliceService} from "../../police/police.service";
-import {Vehicle_owner} from "../../api/vehicle_owner";
-
+import {Table} from "primeng/table";
+import {Station} from "../api/station";
+import {PoliceStationService} from "./police-station.service";
 
 @Component({
-  selector: 'app-fiche-recherche-details',
-  templateUrl: './fiche-recherche-details.component.html',
-  styleUrls: ['./fiche-recherche-details.component.scss']
+  selector: 'app-police-station',
+  templateUrl: './police-station.component.html',
+  styleUrls: ['./police-station.component.scss']
 })
-export class FicheRechercheDetailsComponent implements OnInit {
-
+export class PoliceStationComponent implements OnInit {
   productDialog: boolean = false;
-  NewPoliceDialog:boolean = false;
-  vehicle_owners:Vehicle_owner[]=[];
-  vehicle_owner:Vehicle_owner={};
+  NewStationDialog:boolean = false
   deleteProductDialog: boolean = false;
   deleteProductsDialog: boolean = false;
   products: Product[] = [];
   product: Product = {};
-  police: Police={};
-  polices: Police[]=[];
+  station: Station={};
+  stations: Station[]=[];
   selectedProducts: Product[] = [];
   submitted: boolean = false;
   cols: any[] = [];
   statuses: any[] = [];
-
   rowsPerPageOptions = [5, 10, 20];
-  constructor(private policeservice:PoliceService,private router:Router) {}
+  constructor(private policeStationService:PoliceStationService,private router:Router) {}
+
   ngOnInit() {
-    this.getPoliceByID();
-    this.getAllPolice();
+    this.getAllStations();
     this.cols = [
       { field: 'product', header: 'Product' },
       { field: 'price', header: 'Price' },
@@ -50,44 +44,45 @@ export class FicheRechercheDetailsComponent implements OnInit {
     ];
   }
 
-  getAllPolice(){
-    this.policeservice.getAllPolice().subscribe((data:any)=>{
+  getAllStations(){
+    this.policeStationService.getAll().subscribe((data:any)=>{
       console.log(data);
-      this.polices=data.policeListResponse;
-      console.log(this.polices);
+      this.stations=data.policeStationListResponse;
+      console.log(this.stations);
+
     })
   }
-  getPoliceByID(){
-    this.policeservice.getPoliceByID(1).subscribe((data:any)=>{
+  getStationByID(){
+    this.policeStationService.getByID(1).subscribe((data:any)=>{
       console.log(data);
     })
   }
 
 
   openNew() {
-    this.police = {};
+    this.station = {};
     this.submitted = false;
-    this.NewPoliceDialog = true;
+    this.NewStationDialog = true;
   }
 
   deleteSelectedProducts() {
     this.deleteProductsDialog = true;
   }
 
-  editPolice(police: Police) {
-    this.police = { ...police };
+  editStation(station: Station) {
+    this.station = { ...station };
     this.productDialog = true;
   }
 
-  deletePolice(police: Police) {
-    this.police = { ...police };
+  deleteStation(station: Station) {
+    this.station = { ...station };
     this.deleteProductDialog = true;
 
   }
 
   confirmDeleteSelected(id:any) {
     this.deleteProductDialog = false;
-    this.policeservice.deletePolice(id).subscribe((data:any)=>{
+    this.policeStationService.delete(id).subscribe((data:any)=>{
       console.log(data);
       window.location.reload();
     })
@@ -97,9 +92,9 @@ export class FicheRechercheDetailsComponent implements OnInit {
     this.submitted = false;
   }
 
-  savePolice(police: Police) {
+  saveStation(station: Station) {
     this.productDialog = false;
-    this.policeservice.createPolice(police).subscribe((data:any)=>{
+    this.policeStationService.create(station).subscribe((data:any)=>{
       console.log(data);
       window.location.reload();
     })
