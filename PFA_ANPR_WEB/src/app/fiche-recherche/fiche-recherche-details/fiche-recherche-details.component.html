@@ -12,7 +12,7 @@
     <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
   </ng-template>
 </p-toolbar>
-<p-table #dt [value]="ficheDeRecherches" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
+<p-table #dt [value]="ficheRecherches" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
   <ng-template pTemplate="caption">
     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
       <h5 class="m-0">Manage ficheDeRecherche</h5>
@@ -41,31 +41,34 @@
   <ng-template pTemplate="body" let-ficheDeRecherche>
     <tr>
       <td>
-        <p-tableCheckbox [value]="FicheRecherches"></p-tableCheckbox>
+        <p-tableCheckbox [value]="ficheDeRecherche"></p-tableCheckbox>
       </td>
       <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
         {{ficheDeRecherche.ficheDeRechercheId}}
+
       </td>
       <td style="width:14%; min-width:10rem;">
         <span class="p-column-title">ID</span>
-<!--        {{ficheDeRecherche.policeOfficer.badgeNumber}}-->
+        {{ficheDeRecherche.badgeNumber}}
       </td><td style="width:14%; min-width:10rem;">
       <span class="p-column-title">Name</span>
-<!--      {{ficheDeRecherche.date}}-->
+      {{ ficheDeRecherche.date | date: 'yyyy-MM-dd HH:mm:ss' }}
     </td>
       <td style="width:14%; min-width:8rem;">
         <span class="p-column-title">Price</span>
-<!--        {{ficheDeRecherche.vehicleOwner.registration_number}}-->
+        {{ficheDeRecherche.registrationNumber}}
       </td>
 
       <td style="width:14%; min-width:10rem;">
         <span class="p-column-title">Category</span>
-<!--        {{ficheDeRecherche.gravity}}-->
+        <p-rating [(ngModel)]="ficheDeRecherche.gravity" [readonly]="true" [cancel]="false" ></p-rating>
+
       </td>
       <td style="width:14%; min-width:10rem;">
         <span class="p-column-title">Status</span>
-<!--        {{ficheDeRecherche.status}}-->
-      </td>
+        <span [ngStyle]="getStatusStyle(ficheDeRecherche.status)" [ngClass]="getStatusClass(ficheDeRecherche.status)">
+        {{ficheDeRecherche.status}}
+    </span>      </td>
       <td>
         <div class="flex">
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editficheDeRecherche(ficheDeRecherche)"></button>

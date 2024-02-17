@@ -14,14 +14,13 @@ import {FicheRechercheService} from "../fiche-recherche.service";
 export class FicheRechercheDetailsComponent implements OnInit {
   productDialog: boolean = false;
   NewFicheRechercheDialog:boolean = false;
-  ficheDeRecherches:FicheDeRecherche[]=[];
   ficheDeRecherche:FicheDeRecherche={};
   deleteProductDialog: boolean = false;
   deleteProductsDialog: boolean = false;
   products: Product[] = [];
   product: Product = {};
-  FicheRecherche: FicheDeRecherche={};
-  FicheRecherches: FicheDeRecherche[]=[];
+  ficheRecherche: FicheDeRecherche={};
+  ficheRecherches: FicheDeRecherche[]=[];
   selectedProducts: Product[] = [];
   submitted: boolean = false;
   cols: any[] = [];
@@ -46,12 +45,36 @@ export class FicheRechercheDetailsComponent implements OnInit {
       { label: 'OUTOFSTOCK', value: 'outofstock' }
     ];
   }
+  getStatusStyle(status: string) {
+    switch (status) {
+      case 'REJECTED':
+        return { color: 'red' };
+      case 'PENDING':
+        return { color: '#534933' };
+      case 'ACCEPTED':
+        return { color: 'green' };
+      default:
+        return {};
+    }
+  }
+  getStatusClass(status: string) {
+    switch (status) {
+      case 'REJECTED':
+        return 'rejected-status';
+      case 'PENDING':
+        return 'pending-status';
+      case 'ACCEPTED':
+        return 'accepted-status';
+      default:
+        return '';
+    }
+  }
 
   getAll(){
     this.ficheRechercheService.getAll().subscribe((data:any)=>{
       console.log(data);
-      this.FicheRecherches=data.ficheDeRechercheListResponse;
-      console.log(this.FicheRecherches);
+      this.ficheRecherches=data.ficheDeRechercheListResponse;
+      console.log(this.ficheRecherches);
     })
   }
   getByID(){
@@ -62,7 +85,7 @@ export class FicheRechercheDetailsComponent implements OnInit {
 
 
   openNew() {
-    this.FicheRecherche = {};
+    this.ficheRecherche = {};
     this.submitted = false;
     this.NewFicheRechercheDialog = true;
   }
@@ -72,12 +95,12 @@ export class FicheRechercheDetailsComponent implements OnInit {
   }
 
   editficheDeRecherche(ficheDeRecherche: FicheDeRecherche) {
-    this.FicheRecherche = { ...ficheDeRecherche };
+    this.ficheRecherche = { ...ficheDeRecherche };
     this.productDialog = true;
   }
 
   deleteficheDeRecherche(ficheDeRecherche: FicheDeRecherche) {
-    this.FicheRecherche = { ...ficheDeRecherche };
+    this.ficheRecherche = { ...ficheDeRecherche };
     this.deleteProductDialog = true;
 
   }

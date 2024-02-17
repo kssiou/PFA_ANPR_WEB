@@ -25,6 +25,7 @@ const routes: Routes = [
       {path:'fiche-recherche-create',component:FicheRechercheCreateComponent},
       {path:'vehicule',component:VehiculeDetailsComponent},
       {path:'citoyens',component:VehiculeOwnerComponent},
+      {path:'login',component:LoginComponent},
       {path:'station-police',component:PoliceStationComponent}
 
 
