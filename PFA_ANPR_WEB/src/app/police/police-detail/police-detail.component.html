@@ -12,7 +12,7 @@
     <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
   </ng-template>
 </p-toolbar>
-<p-table #dt [value]="polices" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
+<p-table #dt [value]="polices" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['firstname','id','lastname','email']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
         <ng-template pTemplate="caption">
           <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 class="m-0">Manage Polices</h5>
@@ -78,7 +78,7 @@
         <div class="formgrid grid">
           <div class="field col">
             <label for="badge_number">badge_number</label>
-            <input type="text" pInputText id="badge_number" [(ngModel)]="police.badge_number" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.badge_number}"/>
+            <input type="text" pInputText id="badge_number" [(ngModel)]="police.badgeNumber" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.badgeNumber}"/>
 
           </div>
           <div class="field col">
@@ -109,21 +109,26 @@
 
     <div class="formgrid grid">
       <div class="field col">
-        <label for="badge_number">badge_number</label>
-        <input type="text" pInputText id="badge_number" [(ngModel)]="police.badge_number" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.badge_number}"/>
+        <label for="badge_number">badge number</label>
+        <input type="text" pInputText id="badge_number" [(ngModel)]="police.badgeNumber" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.badgeNumber}"/>
 
       </div>
       <div class="field col">
-        <label for="firstname">email</label>
+        <label for="firstname">firstname</label>
         <input type="text" pInputText id="surnamefirstname" [(ngModel)]="police.firstname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.firstname}"/>
 
       </div>
     </div>
     <div class="field">
-      <label for="lastname">email</label>
+      <label for="lastname">lastname</label>
       <input type="text" pInputText id="email" [(ngModel)]="police.lastname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.lastname}"/>
       <small class="ng-dirty ng-invalid" *ngIf="submitted && !police.lastname">email is required.</small>
    </div>
+    <div class="field">
+      <label for="lastname">username</label>
+      <input type="text" pInputText id="username" [(ngModel)]="police.username" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.username}"/>
+      <small class="ng-dirty ng-invalid" *ngIf="submitted && !police.username">email is required.</small>
+    </div>
     <!-- <div class="field">-->
 <!--    <label for="localisation">localisation</label>-->
 <!--    <input type="text" pInputText id="localisation" [(ngModel)]="police.localisation" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !police.localisation}"/>-->
@@ -132,7 +137,7 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="NewPoliceDialog=false"></button>
     <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"(click)="savePolice(police)" ></button>
   </ng-template>
 </p-dialog>
@@ -140,22 +145,12 @@
       <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
         <div class="flex align-items-center justify-content-center">
           <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-          <span *ngIf="polices">Are you sure you want to deletea  <b>{{police.badge_number}}</b>?</span>
+          <span *ngIf="polices">Are you sure you want to deletea  <b>{{police.badgeNumber}}</b>?</span>
         </div>
         <ng-template pTemplate="footer">
 
           <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
-          <button pButton pRipple icon="pi pi-times" class="p-button-text" label="yes"  (click)="confirmDeleteSelected(police.police_officer_id) "></button>
+          <button pButton pRipple icon="pi pi-times" class="p-button-text" label="yes"  (click)="confirmDeleteSelected(police.policeOfficerId);"></button>
         </ng-template>
       </p-dialog>
 
-      <p-dialog [(visible)]="deleteProductsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
-        <div class="flex align-items-center justify-content-center">
-          <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-          <span>Are you sure you want to delete selected products?</span>
-        </div>
-        <ng-template pTemplate="footer">
-          <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
-          <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" ></button>
-        </ng-template>
-      </p-dialog>

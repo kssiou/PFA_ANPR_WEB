@@ -12,7 +12,7 @@
     <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
   </ng-template>
 </p-toolbar>
-<p-table #dt [value]="licensePlates" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
+<p-table #dt [value]="licensePlates" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['id','number']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
   <ng-template pTemplate="caption">
     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
       <h5 class="m-0">Manage licensePlate</h5>
@@ -27,7 +27,7 @@
       <th style="width: 3rem">
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
-      <th pSortableColumn="police_licensePlate_id">police_licensePlate_id <p-sortIcon field="ID"></p-sortIcon></th>
+      <th pSortableColumn="police_licensePlate_id">licensePlate id <p-sortIcon field="ID"></p-sortIcon></th>
       <th pSortableColumn="Number">Number <p-sortIcon field="Number"></p-sortIcon></th>
       <th>actions</th>
     </tr>
@@ -59,8 +59,8 @@
 
     <div class="formgrid grid">
       <div class="field col">
-        <label for="firstname">name</label>
-        <input type="text" pInputText id="firstname" [(ngModel)]="licensePlate.number" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !licensePlate.number}"/>
+        <label for="Number">Number</label>
+        <input type="text" pInputText id="Number" [(ngModel)]="licensePlate.number" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !licensePlate.number}"/>
       </div>
     </div>
 
@@ -77,8 +77,8 @@
 
     <div class="formgrid grid">
       <div class="field col">
-        <label for="name">name</label>
-        <input type="text" pInputText id="name" [(ngModel)]="licensePlate.number" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !licensePlate.number}"/>
+        <label for="Number">Number</label>
+        <input type="text" pInputText id="Number" [(ngModel)]="licensePlate.number" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !licensePlate.number}"/>
 
       </div>
 
@@ -87,7 +87,7 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="NewlicensePlateDialog=false"></button>
     <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"(click)="savelicensePlate(licensePlate)" ></button>
   </ng-template>
 </p-dialog>
@@ -100,17 +100,7 @@
   <ng-template pTemplate="footer">
 
     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
-    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="yes"  (click)="confirmDeleteSelected(licensePlate.license_plate_id) "></button>
+    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="yes"  (click)="confirmDeleteSelected(licensePlate.id)"></button>
   </ng-template>
 </p-dialog>
 
-<p-dialog [(visible)]="deleteProductsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
-  <div class="flex align-items-center justify-content-center">
-    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-    <span>Are you sure you want to delete selected products?</span>
-  </div>
-  <ng-template pTemplate="footer">
-    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
-    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" ></button>
-  </ng-template>
-</p-dialog>

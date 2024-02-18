@@ -9,49 +9,81 @@
             <div class="field col-12 md:col-6">
               <label for="Person_name">Nom</label>
               <input pInputText type="text" id="Person_name" formControlName="Person_name" />
+              <small *ngIf="FicheRechercheForm.get('Person_name').invalid && FicheRechercheForm.get('Person_name').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Person_name').hasError('required')">Nom est requis</div>
+                <div *ngIf="FicheRechercheForm.get('Person_name').hasError('minlength')">Nom doit avoir au moins 3 caractères</div>
+              </small>
             </div>
             <div class="field col-12 md:col-6">
               <label for="Person_surname">Prenom</label>
               <input pInputText type="text" id="Person_surname" formControlName="Person_surname" />
+              <small *ngIf="FicheRechercheForm.get('Person_surname').invalid && FicheRechercheForm.get('Person_surname').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Person_surname').hasError('required')">Prenom est requis</div>
+                <div *ngIf="FicheRechercheForm.get('Person_surname').hasError('minlength')">Prenom doit avoir au moins 3 caractères</div>
+              </small>
             </div>
             <div class="field col-12 md:col-5">
               <label for="Person_CIN">CIN</label>
               <input pInputText type="text" id="Person_CIN" formControlName="Person_CIN" />
+              <small *ngIf="FicheRechercheForm.get('Person_CIN').invalid && FicheRechercheForm.get('Person_CIN').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Person_CIN').hasError('required')">Le CIN doit être est requis</div>
+              </small>
             </div>
             <div class="field col-12 md:col-3">
               <label htmlFor="Person_nationality">Nationalite</label>
               <input pInputText type="text" id="Person_nationality" formControlName="Person_nationality" />
+              <small *ngIf="FicheRechercheForm.get('Person_nationality').invalid && FicheRechercheForm.get('Person_nationality').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Person_nationality').hasError('required')">Nationalite est requise</div>
+              </small>
             </div>
             <div class="field col-12 md:col-4">
               <label for="Person_number">Numero</label>
               <input pInputText type="text" id="Person_number" formControlName="Person_number" />
+              <small *ngIf="FicheRechercheForm.get('Person_number').invalid && FicheRechercheForm.get('Person_number').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Person_number').hasError('pattern')">Le numéro doit être composé uniquement de chiffres</div>
+              </small>
             </div>
             <div class="field col-12">
             <label for="Person_address">Address</label>
             <input pInputText type="text" id="Person_address" formControlName="Person_address" />
+              <small *ngIf="FicheRechercheForm.get('Person_address').invalid && FicheRechercheForm.get('Person_address').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Person_address').hasError('required')">L'adresse est requise</div>
+              </small>
           </div>
             <div class="field col-12">
               <label for="Person_email">Email</label>
               <input pInputText type="text" id="Person_email" formControlName="Person_email" />
+              <small *ngIf="FicheRechercheForm.get('Person_email').invalid && FicheRechercheForm.get('Person_email').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Person_email').hasError('email')">Adresse email invalide</div>
+              </small>
             </div>
             <div class="field col-12 md:col-6">
-              <label htmlFor="city">City</label>
+              <label htmlFor="city">Ville</label>
               <input pInputText id="city" type="text" />
             </div>
 
             <div class="field col-12 md:col-3">
-              <label htmlFor="Status">Status</label>
+              <label htmlFor="Status">Statue</label>
               <p-dropdown [options]="dropdownItems" optionLabel="name" formControlName="Status"> </p-dropdown>
+              <small *ngIf="FicheRechercheForm.get('Status').invalid && FicheRechercheForm.get('Status').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Status').hasError('required')">Le statut est requis</div>
+              </small>
             </div>
             <div class="field col-12 md:col-3">
-              <label htmlFor="zip">Zip</label>
-              <input pInputText id="zip" type="text"formControlName="Zip" />
+              <label htmlFor="zip">Code Postal</label>
+              <input pInputText id="zip" type="text" formControlName="Zip" />
+              <small *ngIf="FicheRechercheForm.get('Zip').invalid && FicheRechercheForm.get('Zip').touched" class="text-danger">
+                <div *ngIf="FicheRechercheForm.get('Zip').hasError('required')">Le code postal est requis</div>
+              </small>
             </div>
             <div class="field col-12 md:col-5 align-label-rating">
               <label htmlFor="lastname2">Degree de Gravite</label>
               <div class="col-12 md:col-6">
                 <div class="custom-rating-wrapper">
                   <p-rating formControlName="Gravity_degree"></p-rating>
+                  <small *ngIf="FicheRechercheForm.get('Gravity_degree').invalid && FicheRechercheForm.get('Gravity_degree').touched" class="text-danger">
+                    <div *ngIf="FicheRechercheForm.get('Gravity_degree').hasError('required')">La gravité est requise</div>
+                  </small>
                 </div>              </div>
             </div>
 
@@ -99,7 +131,7 @@
             <button pButton pRipple type="button" label=" + Ajouter Vehicule" class="p-button-primary" (click)="showVehiculeDialg()"></button>
           </div>
           <div class="field col-12 md:col-12" style="text-align: right;">
-            <button pButton pRipple type="button" label="Enregistrer " class="p-button-success"  ></button>
+            <button pButton pRipple type="button" label="Enregistrer " class="p-button-success" (click)="  addFicheDeRecherche()"  ></button>
           </div>
 
         </div>
@@ -144,5 +176,42 @@
     </p-dialog>
   </form>
   {{vehiculeList|json}}
+  {{FicheRechercheForm.get('Vehicules').value|json}}
+  <p-dialog [visible]="AddVehiculedialg" header="donnees de vehicule" [modal]="true" [style]="{ width: '25vw' ,height:'23vw'}" class="p-fluid"                 >
+    <ng-template pTemplate="content">
+      <form [formGroup]="AddVehiculeForm">
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-12 md:col-6">
+            <label htmlFor="vehicle_registration">Vehicule Registration</label>
+            <input pInputText id="vehicle_registration" type="text" formControlName="vehicle_registration"/>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label htmlFor="vehicle_Licence_plate">Vehicule Matricule</label>
+            <input pInputText id="vehicle_Licence_plate" type="text" formControlName="vehicle_Licence_plate" />
+          </div>
+
+          <div class="field col-12 md:col-6">
+            <label htmlFor="vehicle_model">Vehicule Model</label>
+            <input pInputText id="vehicle_model" type="text" formControlName="vehicle_model"/>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label For="color_vehicule">Couleur</label>
+            <div class="col-12 md:col-7" style="margin-right: 25px;">
+              <p-colorPicker  [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" id="color_vehicule" formControlName="vehicle_colors"></p-colorPicker>
+            </div>
+          </div>
+
+
+
+        </div>
+      </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideVehiculeDialg()"  ></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="addVehicule()" ></button>
+    </ng-template>
+  </p-dialog>
+
 </div>
 

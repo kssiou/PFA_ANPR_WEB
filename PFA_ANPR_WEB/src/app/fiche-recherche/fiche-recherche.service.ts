@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {FicheDeRecherche} from "../api/ficheDeRecherche";
+import {Fiche_recherche} from "../api/fiche_recherche";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class FicheRechercheService {
   private apiUrl = 'http://localhost:8081/ficheDeRecherche'; // Default API endpoint
   constructor(private http: HttpClient) {
   }
-  create(ficheDeRecherche: FicheDeRecherche) {
+  create(ficheDeRecherche: Fiche_recherche) {
     return this.http.post(this.apiUrl+"/create", ficheDeRecherche);
   }
   getByID(id: any):Observable<FicheDeRecherche> {

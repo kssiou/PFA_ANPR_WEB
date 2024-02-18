@@ -4,6 +4,7 @@ import {Product} from "../../api/product";
 import {Router} from "@angular/router";
 import {FicheDeRecherche} from "../../api/ficheDeRecherche";
 import {FicheRechercheService} from "../fiche-recherche.service";
+import {Fiche_recherche} from "../../api/fiche_recherche";
 
 
 @Component({
@@ -85,9 +86,9 @@ export class FicheRechercheDetailsComponent implements OnInit {
 
 
   openNew() {
-    this.ficheRecherche = {};
-    this.submitted = false;
-    this.NewFicheRechercheDialog = true;
+
+    this.router.navigateByUrl('/fiche-recherche-create');
+
   }
 
   deleteSelectedProducts() {
@@ -117,7 +118,7 @@ export class FicheRechercheDetailsComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveFicheRecherche(ficheDeRecherche: FicheDeRecherche) {
+  saveFicheRecherche(ficheDeRecherche: Fiche_recherche) {
     this.productDialog = false;
     this.ficheRechercheService.create(ficheDeRecherche).subscribe((data:any)=>{
       console.log(data);

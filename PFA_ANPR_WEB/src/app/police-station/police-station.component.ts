@@ -64,6 +64,10 @@ export class PoliceStationComponent implements OnInit {
     this.submitted = false;
     this.NewStationDialog = true;
   }
+  Cancel() {
+    this.submitted = false;
+    this.NewStationDialog = false;
+  }
 
   deleteSelectedProducts() {
     this.deleteProductsDialog = true;
@@ -126,4 +130,6 @@ export class PoliceStationComponent implements OnInit {
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
+
+  protected readonly location = location;
 }

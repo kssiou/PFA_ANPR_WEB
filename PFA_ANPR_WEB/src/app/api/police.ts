@@ -1,6 +1,6 @@
 export interface Police {
-  police_officer_id?: number;
-  badge_number ?: string;
+  policeOfficerId?: number;
+  badgeNumber ?: string;
   firstname?: string;
   lastname?: string;
   username?: string;

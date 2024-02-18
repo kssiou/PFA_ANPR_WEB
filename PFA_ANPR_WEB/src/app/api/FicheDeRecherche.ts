@@ -5,4 +5,5 @@ export interface FicheDeRecherche {
   gravity?:String;
   registration_number?:String;
   status?:String;
+  
 }

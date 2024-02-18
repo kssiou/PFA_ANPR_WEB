@@ -82,8 +82,8 @@ export class MatriculeDetailComponent implements OnInit {
 
   confirmDeleteSelected(id:any) {
     this.deleteProductDialog = false;
+    console.log(id);
     this.licensePlateService.delete(id).subscribe((data:any)=>{
-      console.log(data);
       window.location.reload();
     })
   }

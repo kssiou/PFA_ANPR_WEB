@@ -1,7 +1,7 @@
 export interface Vehicle_owner {
-  id?:number ;
+  vehicleOwnerId?:number ;
   firstname ?: string;
   lastname ?: string;
-  registration_number?:string ;
+  registrationNumber?:string ;
   username?:string;
 }

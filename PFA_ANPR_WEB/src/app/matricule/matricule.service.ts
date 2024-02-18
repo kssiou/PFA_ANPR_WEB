@@ -14,12 +14,12 @@ export class MatriculeService {
   create(licensePlate: LicensePlate) {
     return this.http.post(this.apiUrl+"/create", licensePlate);
   }
-  getByID(id: any):Observable<Vehicule> {
-    return this.http.get<Vehicule>(this.apiUrl + '/' + id);
+  getByID(id: any):Observable<LicensePlate> {
+    return this.http.get<LicensePlate>(this.apiUrl + '/' + id);
   }
-  getAll():Observable<Vehicule[]>
+  getAll():Observable<LicensePlate[]>
   {
-    return this.http.get<Vehicule[]>(this.apiUrl + '/all');
+    return this.http.get<LicensePlate[]>(this.apiUrl + '/all');
   }
   delete(id: any) {
     return this.http.delete(this.apiUrl+ '/delete/' + id);
