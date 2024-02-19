@@ -118,15 +118,15 @@ export class FicheRechercheDetailsComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveFicheRecherche(ficheDeRecherche: Fiche_recherche) {
-    this.productDialog = false;
-    this.ficheRechercheService.create(ficheDeRecherche).subscribe((data:any)=>{
-      console.log(data);
-      window.location.reload();
-    })
-
-
-  }
+  // saveFicheRecherche(ficheDeRecherche: Fiche_recherche) {
+  //   this.productDialog = false;
+  //   this.ficheRechercheService.create(?).subscribe((data:any)=>{
+  //     console.log(data);
+  //     window.location.reload();
+  //   })
+  //
+  //
+  // }
 
   findIndexById(id: string): number {
     let index = -1;

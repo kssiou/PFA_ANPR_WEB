@@ -74,11 +74,12 @@ export class DashboardComponent implements OnInit {
   getdata(){
     {
       this.ficheRechercheService.getAll().subscribe((ficheData: any) => {
+        console.log(ficheData.ficheDeRechercheListResponse);
         this.ficheRecherches = ficheData.ficheDeRechercheListResponse;
         this.ficheRecherchesCount=this.ficheRecherches.length * 50 ;
-        console.log("Fiche de Recherches lengthaa * 50:", this.ficheRecherches.filter((item: { status: string; })=> item.status === 'ACCEPTED').length );
-        console.log("Fiche de Recherches lengthaa * 50:", this.ficheRecherches.filter((item: { status: string; })=> item.status === 'PENDING').length );
-        console.log("Fiche de Recherches lengthaa * 50:", this.ficheRecherches.filter((item: { status: string; })=> item.status === 'REJECTED').length );
+        console.log("Fiche de Recherches lengthaa * 50:", this.ficheRecherches.filter((item: { status: string; })=> item.status === 'ENCOURS').length );
+        console.log("Fiche de Recherches lengthaa * 50:", this.ficheRecherches.filter((item: { status: string; })=> item.status === 'SOUMISE').length );
+        console.log("Fiche de Recherches lengthaa * 50:", this.ficheRecherches.filter((item: { status: string; })=> item.status === 'APPROUVEE').length );
         console.log("Fiche de Recherches lengthaa * 50:", this.ficheRecherches);
         this.initChart();
 

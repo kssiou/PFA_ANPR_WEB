@@ -13,25 +13,28 @@ import {FicheRechercheCreateComponent} from "./fiche-recherche/fiche-recherche-c
 import {VehiculeOwnerComponent} from "./vehicule-owner/vehicule-owner.component";
 import {VehiculeDetailsComponent} from "./vehicule/vehicule-details/vehicule-details.component";
 import {PoliceStationComponent} from "./police-station/police-station.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
+  { path: 'login',
+    component: LoginControllerComponent
+  }, // Login route is not a child route
+
   {
-    path: '', component: AppLayoutComponent,
+    path: '',
+    component: AppLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
-      {path:'matricule',component:MatriculeDetailComponent},
-      {path:'dashboard',component:DashboardComponent},
-      {path:'police',component:PoliceDetailComponent},
-      {path:'fiche-recherche',component:FicheRechercheDetailsComponent},
-      {path:'fiche-recherche-create',component:FicheRechercheCreateComponent},
-      {path:'vehicule',component:VehiculeDetailsComponent},
-      {path:'citoyens',component:VehiculeOwnerComponent},
-      {path:'login',component:LoginComponent},
-      {path:'station-police',component:PoliceStationComponent}
-
-
+      { path: 'matricule', component: MatriculeDetailComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'police', component: PoliceDetailComponent },
+      { path: 'fiche-recherche', component: FicheRechercheDetailsComponent },
+      { path: 'fiche-recherche-create', component: FicheRechercheCreateComponent },
+      { path: 'vehicule', component: VehiculeDetailsComponent },
+      { path: 'citoyens', component: VehiculeOwnerComponent },
+      { path: 'station-police', component: PoliceStationComponent }
     ]
   }
-
 ];
 
 @NgModule({
